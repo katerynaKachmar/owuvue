@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div>
+      <input type="text" v-model="item">
+      <button @click="add()" v-if="toDoList.length<10">add</button>
+
+      <ul>
+        <li v-for="(item, index) in toDoList" :key="index">{{item}}
+          <button @click="remove(index)">remove</button>
+
+        </li>
+
+      </ul>
+    </div>
+
   </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      toDoList: ['sleep', 'eat', 'home work'],
+      item: ''
+    }
+
+  },
+  computed: {
+
+  },
+  methods: {
+    add() {
+      this.toDoList.push(this.item),
+      this.item = ''
+    },
+    remove(index) {
+      this.toDoList.splice(index, 1)
+
+    }
+
+
+
   }
+
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
